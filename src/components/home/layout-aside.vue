@@ -1,7 +1,7 @@
 <template>
   <div class="layout-aside">
     <div class="title">
-      <img src="../../assets/logo_admin.png" alt />
+      <img src="../../assets/img/logo_admin.png" alt />
     </div>
     <el-menu
       style="width:201px"
