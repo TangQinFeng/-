@@ -81,7 +81,7 @@ export default {
 // lang='less' 允许使用less
 // scoped 样式只在本组件中生效
 .login {
-  background-image: url("../../assets/login_bg.jpg");
+  background-image: url("../../assets/img/login_bg.jpg");
   height: 100vh;
   background-position: center;
   display: flex;
