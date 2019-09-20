@@ -56,7 +56,7 @@ export default {
     login () {
       this.$refs.loginForm.validate((isOk) => {
         if (isOk) {
-          this.$http({
+          this.$axios({
             url: '/authorizations',
             method: 'post',
             data: this.loginForm
