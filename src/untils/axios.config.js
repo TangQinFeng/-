@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import router from './permission'
+import router from '../permission'
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
 axios.interceptors.request.use(function (config) {
+  // 请求到达之前拦截统一注入token
   let token = window.localStorage.getItem('login-token')
+
   config.headers['Authorization'] = `Bearer ${token}`
   return config
 }, function (error) {

@@ -41,7 +41,7 @@ export default {
       this.$axios({
         url: '/user/profile'
       }).then(result => {
-        this.userInfo = result.data.data
+        this.userInfo = result.data
       })
     },
     commonClick (key) {
@@ -65,7 +65,7 @@ export default {
 <style lang='less' scoped>
  .layout-header{
      height: 50px;
-     margin-top: 20px;
+     margin-top: 10px;
      .title{
          margin-left: 4px;
      }
@@ -75,6 +75,7 @@ export default {
          border-radius: 50%;
          margin-right: 4px;
          vertical-align: middle;
+
      }
 
  }

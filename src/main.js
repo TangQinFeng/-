@@ -5,7 +5,7 @@ import ElementUI from 'element-ui'
 import Component from './components'
 import 'element-ui/lib/theme-chalk/index.css'
 import './styles/index.less'
-import axios from './axios.config'
+import axios from './untils/axios.config'
 Vue.use(Component)
 Vue.use(axios)
 Vue.use(ElementUI)

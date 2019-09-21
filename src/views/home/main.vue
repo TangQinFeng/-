@@ -1,5 +1,7 @@
 <template>
-  <div class="home"></div>
+  <div class="home">
+
+  </div>
 </template>
 
 <script>
@@ -13,5 +15,6 @@ export default {
       background-image: url('../../assets/img/main.jpg');
       height: 100vh;
       background-size:cover;
+      margin-top: 5px;
    }
 </style>
