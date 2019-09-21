@@ -5,7 +5,7 @@
     </bread-crumb>
     <el-table :data="list">
       <el-table-column  label="标题" prop="title" width="600px"></el-table-column>
-      <el-table-column align='center' label="评论状态" prop="comment_status"></el-table-column>
+      <el-table-column :formatter="stateFormatter" align='center' label="评论状态" prop="comment_status"></el-table-column>
       <el-table-column align='center' label="总评论数" prop="total_comment_count"></el-table-column>
       <el-table-column align='center' label="粉丝评论数" prop="fans_comment_count"></el-table-column>
       <el-table-column align='center' label="操作" ></el-table-column>
@@ -30,6 +30,9 @@ export default {
         console.log(result)
         this.list = result.data.results
       })
+    },
+    stateFormatter (row, column, cellValue, index) {
+      return cellValue ? '正常' : '关闭'
     }
   },
   created () {
