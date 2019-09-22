@@ -11,7 +11,7 @@
       <el-table-column align='center' label="操作"  >
         <template slot-scope="obj">
             <el-button size="small" type="text">修改</el-button>
-        <el-button size="small" type="text" @click='closeOrOpen(obj.row)'>
+        <el-button :style="{color: obj.row.comment_status ? '#E6A23C' : '#409EFF' }"   size="small" type="text" @click='closeOrOpen(obj.row)'>
           {{
             obj.row.comment_status?'关闭评论':'打开评论'
           }}
@@ -44,16 +44,19 @@ export default {
       return cellValue ? '正常' : '关闭'
     },
     closeOrOpen (row) {
-      // let mess = row.comment_status ? '打开' : '关闭'
-      this.$axios({
-        url: 'comments/status',
-        method: 'put',
-        params: { article_id: row.id },
-        data: { allow_comment: !row.comment_status } // body参数  调用状态和当前状态是反着的 所以取反
-      }).then(() => {
-        this.getComment()
+      let mess = row.comment_status ? '打开' : '关闭'
+      this.$confirm(`您确定要${mess}评论?`).then(() => {
+        this.$axios({
+          url: 'comments/status',
+          method: 'put',
+          params: { article_id: row.id.toString() },
+          data: { allow_comment: !row.comment_status } // body参数  调用状态和当前状态是反着的 所以取反
+        }).then(() => {
+          this.getComment()
+        })
       })
     }
+
   },
   created () {
     this.getComment()
