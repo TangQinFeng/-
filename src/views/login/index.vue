@@ -4,7 +4,8 @@
       <div class="title">
         <img src="../../assets/img/logo_index.png" />
       </div>
-      <el-form :model="loginForm" :rules="loginRules" ref="loginForm">
+      <!-- status-icon -->
+      <el-form :model="loginForm" :rules="loginRules" status-icon  ref="loginForm">
         <el-form-item prop="mobile">
           <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
         </el-form-item>
