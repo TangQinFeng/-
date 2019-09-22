@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="never">
+  <el-card shadow="never" v-loading="loading">
     <bread-crumb>
       <template slot="title">评论列表</template>
     </bread-crumb>
@@ -55,7 +55,9 @@ export default {
         total: 0,
         // 每页几条
         pageSize: 10
-      }
+
+      },
+      loading: false
     }
   },
   methods: {
@@ -64,6 +66,7 @@ export default {
       this.getComment()
     },
     getComment () {
+      this.loading = true
       this.$axios({
         url: '/articles',
         params: {
@@ -72,6 +75,7 @@ export default {
           per_page: this.page.pageSize
         }
       }).then(result => {
+        this.loading = false
         this.list = result.data.results
         this.page.total = result.data.total_count
       })
