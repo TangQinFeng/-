@@ -6,6 +6,7 @@
            <!-- 表单 -->
         <el-form style="margin-left:50px">
             <!-- 文章状态 -->
+            <!-- el-form-item 中 label的值为表单项标题 -->
             <el-form-item label="文章状态:">
               <!-- v-model来源于 el-radio中的label属性 -->
                  <el-radio-group @change="changeCondition" v-model="formData.status">
