@@ -5,7 +5,7 @@ import router from '../permission'
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
 // 换了转化方法使得数据不失真
 axios.defaults.transformResponse = [function (data) {
-  return jsonBig.parse(data)
+  return data ? jsonBig.parse(data) : {}
 }]
 axios.interceptors.request.use(function (config) {
   // 请求到达之前拦截统一注入token
