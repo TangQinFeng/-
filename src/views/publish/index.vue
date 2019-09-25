@@ -63,6 +63,13 @@ export default {
     }
   },
   methods: {
+    getArticleById (articleId) {
+      this.$axios({
+        url: `/articles/${articleId}`
+      }).then(result => {
+        this.formData = result.data
+      })
+    },
     getChannels () {
       this.$axios({
         url: '/channels'
@@ -73,9 +80,10 @@ export default {
     pulish (draft) {
       this.$refs.pubForm.validate((isOK) => {
         if (isOK) {
+          let { articleId } = this.$route.params
           this.$axios({
-            url: '/articles',
-            method: 'post',
+            url: articleId ? `articles/${articleId}` : '/articles',
+            method: articleId ? 'put' : 'post',
             params: { draft },
             data: this.formData
           }).then(() => {
@@ -87,6 +95,8 @@ export default {
   },
   created () {
     this.getChannels()
+    let { articleId } = this.$route.params
+    articleId && this.getArticleById(articleId)
   }
 }
 </script>
