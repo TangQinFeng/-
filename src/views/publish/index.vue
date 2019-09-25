@@ -20,12 +20,13 @@
       </el-form-item>
       <!-- 封面 -->
       <el-form-item label="封面" prop="cover" style="margin-top:120px">
-        <el-radio-group v-model="formData.cover.type">
+        <el-radio-group v-model="formData.cover.type" @change="changeType">
           <el-radio :label="1">单图</el-radio>
           <el-radio :label="3">三图</el-radio>
           <el-radio :label="0">无图</el-radio>
           <el-radio :label="-1">自动</el-radio>
         </el-radio-group>
+        {{formData.cover.images}}
       </el-form-item>
       <el-form-item label="频道" prop="channel_id">
         <el-select v-model="formData.channel_id">
@@ -63,6 +64,17 @@ export default {
     }
   },
   methods: {
+    // 类型改变事件
+    changeType () {
+      if (this.formData.cover.type === 1) {
+        this.formData.cover.images = ['']
+      } else if (this.formData.cover.type === 3) {
+        this.formData.cover.images = ['', '', '']
+      } else {
+        this.formData.cover.images = []
+      }
+    },
+    // 根据ID获取文章详情
     getArticleById (articleId) {
       this.$axios({
         url: `/articles/${articleId}`
