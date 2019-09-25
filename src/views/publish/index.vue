@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card >
     <bread-crumb slot="header">
       <template slot="title">发布文章</template>
     </bread-crumb>
@@ -9,6 +9,7 @@
       label-width="100px"
       :model="formData"
       :rules="rules"
+      v-loading='loading'
     >
       <!-- 标题 -->
       <el-form-item label="标题" prop="title">
@@ -26,8 +27,8 @@
           <el-radio :label="0">无图</el-radio>
           <el-radio :label="-1">自动</el-radio>
         </el-radio-group>
-        {{formData.cover.images}}
       </el-form-item>
+      <cover-image :images='formData.cover.images'></cover-image>
       <el-form-item label="频道" prop="channel_id">
         <el-select v-model="formData.channel_id">
           <el-option v-for="item in channels" :key="item.id" :value="item.id" :label="item.name"></el-option>
@@ -50,6 +51,7 @@ export default {
         content: [{ required: true, message: '内容不能为空' }],
         channel_id: [{ required: true, message: '请选择频道' }]
       },
+      loading: false,
       channels: [],
       formData: {
         title: '', // 标题
@@ -76,10 +78,12 @@ export default {
     },
     // 根据ID获取文章详情
     getArticleById (articleId) {
+      this.loading = true
       this.$axios({
         url: `/articles/${articleId}`
       }).then(result => {
         this.formData = result.data
+        this.loading = false
       })
     },
     getChannels () {
