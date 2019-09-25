@@ -75,6 +75,7 @@ export default {
         if (isOK) {
           this.$axios({
             url: '/articles',
+            method: 'post',
             params: { draft },
             data: this.formData
           }).then(() => {
