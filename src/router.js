@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Home from './views/home/'
 import Login from './views/login'
 import Main from './views/home/main'
-
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +47,11 @@ export default new Router({
         // 修改文章
         path: 'publish/:articleId',
         component: () => import('./views/publish')
+      },
+      {
+        // 账户信息
+        path: 'account',
+        component: () => import('./views/account')
       }
       ]
     },
