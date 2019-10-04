@@ -52,6 +52,10 @@ export default new Router({
         // 账户信息
         path: 'account',
         component: () => import('./views/account')
+      },
+      {
+        path: 'gradata',
+        component: () => import('./views/fans')
       }
       ]
     },
