@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import eventBus from '../../untils/eventBus'
 export default {
   data () {
     return {
@@ -63,6 +64,7 @@ export default {
             data: this.formData
           }
           ).then(() => {
+            eventBus.$emit('updataUserInfo')
             this.$message({ message: '保存成功', type: 'success' })
           })
         }
@@ -78,6 +80,7 @@ export default {
         method: 'patch',
         data
       }).then(result => {
+        eventBus.$emit('updataUserInfo')
         this.formData.photo = result.data.photo
         this.loading = false
       })
