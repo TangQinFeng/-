@@ -1,5 +1,5 @@
 <template>
-  <el-card class="userInfo">
+  <el-card class="userInfo" v-loading="loading">
       <bread-crumb slot="header">
         <template slot="title">账户信息</template>
       </bread-crumb>
@@ -20,7 +20,9 @@
             <el-button type="primary" style="margin-left:60px;width:100px" @click="saveUser">保存信息</el-button>
         </el-form-item>
       </el-form>
-      <img :src="formData.photo?formData.photo:defaultImg" class="userImg">
+      <el-upload action="" :show-file-list="false" :http-request="uploadImg">
+         <img :src="formData.photo?formData.photo:defaultImg" class="userImg">
+      </el-upload>
   </el-card>
 </template>
 
@@ -36,17 +38,22 @@ export default {
         email: [{ require: true, message: '邮箱不能为空' },
           { pattern: /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/, message: '邮箱格式不正确' }]
       },
-      defaultImg: require('../../assets/img/avatar.jpg')
+      defaultImg: require('../../assets/img/avatar.jpg'),
+      loading: false
     }
   },
   methods: {
+    // 用户信息获取
     getUserInfo () {
+      this.loading = true
       this.$axios({
         url: '/user/profile'
       }).then(result => {
         this.formData = result.data
+        this.loading = false
       })
     },
+    // 数据保存
     saveUser () {
       this.$refs.accountForm.validate((isOk) => {
         if (isOk) {
@@ -59,6 +66,20 @@ export default {
             this.$message({ message: '保存成功', type: 'success' })
           })
         }
+      })
+    },
+    // 头像上传
+    uploadImg (params) {
+      this.loading = true
+      let data = new FormData()
+      data.append('photo', params.file)
+      this.$axios({
+        url: 'user/photo',
+        method: 'patch',
+        data
+      }).then(result => {
+        this.formData.photo = result.data.photo
+        this.loading = false
       })
     }
   },
